@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth',
     "dj_rest_auth.registration",
-    'drf_spectacular'
+    'drf_spectacular',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -83,6 +84,7 @@ TEMPLATES = [
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # new
+
 SITE_ID = 1 # new
 
 WSGI_APPLICATION = 'app.wsgi.application'
@@ -148,12 +150,13 @@ CORS_ALLOWED_ORIGINS = (
 "http://localhost:8000",
 )
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", 'http://localhost:8000']
 
 AUTH_USER_MODEL = 'core.CustomUser'
 
 ACCOUNT_USERNAME_REQUIRED = False # new
 ACCOUNT_AUTHENTICATION_METHOD = "email" # new
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True # new
 ACCOUNT_UNIQUE_EMAIL = True # new
 
@@ -163,5 +166,17 @@ AUTHENTICATION_BACKENDS = (
 )
 
 REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+    "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+    "rest_framework.authentication.SessionAuthentication",
+    "rest_framework.authentication.TokenAuthentication", # new
+    ],
     'DEFAULT_SCHEMA_CLASS' : 'drf_spectacular.openapi.AutoSchema'
 }
+
+REST_AUTH = {
+    'LOGIN_SERIALIZER': 'users.serializers.CustomLoginSerializer',
+    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer'
+    }
