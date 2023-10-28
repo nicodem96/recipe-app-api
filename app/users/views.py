@@ -8,6 +8,7 @@ from allauth.account.models import EmailConfirmation, EmailConfirmationHMAC
 from django.http import HttpResponseRedirect
 from .serializers import ConfirmEmailSerializer
 
+
 class ConfirmEmailView(APIView):
     permission_classes = [AllowAny]
 

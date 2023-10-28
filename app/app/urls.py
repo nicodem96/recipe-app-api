@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import (
@@ -32,4 +33,5 @@ urlpatterns = [
         name='api-docs',
     ),
     path("api/v1/dj-rest-auth/", include("users.urls")),
+    path("registration/account-confirm-email/<key>", ConfirmEmailView.as_view(), name='account_confirm_email') # noqa
 ]

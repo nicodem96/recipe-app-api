@@ -8,9 +8,10 @@ from allauth.account import app_settings as allauth_account_settings
 class CustomLoginSerializer(RestAuthLoginSerializer):
     username = None
 
+
 class CustomRegisterSerializer(RegisterSerializer):
     username = None
-    email = serializers.EmailField(required=allauth_account_settings.EMAIL_REQUIRED)
+    email = serializers.EmailField(required=allauth_account_settings.EMAIL_REQUIRED) # noqa
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
 
@@ -19,6 +20,7 @@ class CustomRegisterSerializer(RegisterSerializer):
             'password1': self.validated_data.get('password1', ''),
             'email': self.validated_data.get('email', ''),
         }
+
 
 class ConfirmEmailSerializer(serializers.Serializer):
     key = serializers.CharField(write_only=True)

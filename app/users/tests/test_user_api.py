@@ -12,6 +12,7 @@ from rest_framework import status
 CREATE_USER_URL = reverse('dj_rest_auth.registration:rest_register')
 '''TOKEN_URL = reverse('dj_rest_auth:rest_login')'''
 
+
 def create_user(**params):
     """Create and return a new user."""
     return get_user_model().objects.create_user(**params)
@@ -28,7 +29,7 @@ class PublicUserApiTests(TestCase):
         payload = {
             'email': 'test@example.com',
             'password1': 'testpass123',
-            'password2' : 'testpass123'
+            'password2': 'testpass123'
         }
         res = self.client.post(CREATE_USER_URL, payload)
 
