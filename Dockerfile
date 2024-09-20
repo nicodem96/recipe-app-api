@@ -1,7 +1,7 @@
 FROM python:3.12.0-alpine3.18
 LABEL maintainer = "nicodem96"
 
-ENV PYTHONUNNUFFERED 1
+ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 
 COPY ./requirements.txt /tmp/requirements.txt

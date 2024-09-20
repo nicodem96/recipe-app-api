@@ -16,22 +16,29 @@ Including another URLconf
 """
 
 
-from django.contrib import admin
-from django.urls import path, include
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularSwaggerView,
 )
-from users.views import ConfirmEmailView
+from django.conf import settings
+from django.contrib import admin
+from django.urls import path, include
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/schema/', SpectacularAPIView.as_view(), name='api-schema'),
+    path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
     path(
-        'api/v1/docs/',
+        'api/docs/',
         SpectacularSwaggerView.as_view(url_name='api-schema'),
         name='api-docs',
     ),
-    path("api/v1/dj-rest-auth/", include("users.urls")),
-    path("registration/account-confirm-email/<key>", ConfirmEmailView.as_view(), name='account_confirm_email') # noqa
+    path('api/user/', include('users.urls')),
+    path('api/recipe/', include('recipes.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT,
+    )

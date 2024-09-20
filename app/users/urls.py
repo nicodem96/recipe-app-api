@@ -1,11 +1,15 @@
-from django.urls import path, include
-from dj_rest_auth.views import PasswordResetConfirmView
+"""
+URL mappings for the user API.
+"""
+from django.urls import path
 
-app_name = 'dj_rest_auth.registration'
+from users import views
+
+
+app_name = 'users'
 
 urlpatterns = [
-    path("", include("dj_rest_auth.urls")),
-    path("registration/", include("dj_rest_auth.registration.urls")),
-    path('rest-auth/password/reset/confirm/<str:uidb64>/<str:token>',
-         PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    ]
+    path('create/', views.CreateUserView.as_view(), name='create'),
+    path('token/', views.CreateTokenView.as_view(), name='token'),
+    path('me/', views.ManageUserView.as_view(), name='me'),
+]

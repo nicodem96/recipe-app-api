@@ -51,3 +51,5 @@ class CustomUserAdmin(BaseUserAdmin):
     )
     search_fields = ("email",)
     ordering = ("id",)
+
+admin.site.register(models.Recipe)

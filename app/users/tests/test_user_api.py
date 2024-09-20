@@ -8,9 +8,9 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework import status
 
-
-CREATE_USER_URL = reverse('dj_rest_auth.registration:rest_register')
-'''TOKEN_URL = reverse('dj_rest_auth:rest_login')'''
+CREATE_USER_URL = reverse('users:create')
+TOKEN_URL = reverse('users:token')
+ME_URL = reverse('users:me')
 
 
 def create_user(**params):
@@ -63,8 +63,8 @@ class PublicUserApiTests(TestCase):
         ).exists()
         self.assertFalse(user_exists)
 
-    '''def test_create_token_for_user(self):
-        test genereates token for valid credentials.
+    def test_create_token_for_user(self):
+        '''test genereates token for valid credentials.'''
         user_details = {
             'name' : 'Test Name',
             'email' : 'test@example.com',
@@ -98,4 +98,5 @@ class PublicUserApiTests(TestCase):
         res = self.client.post(TOKEN_URL, payload)
 
         self.assertNotIn('token', res.data)
-        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)'''
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
