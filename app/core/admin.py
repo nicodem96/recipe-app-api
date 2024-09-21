@@ -1,55 +1,44 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import get_user_model
 from core import models
 
 
-@admin.register(models.CustomUser)
 class CustomUserAdmin(BaseUserAdmin):
-
-    model = get_user_model()
-
-    list_display = (
-        "email",
-        "is_active",
-        "is_staff",
-        "is_superuser",
-        "last_login",
-    )
-    list_filter = ("is_active", "is_staff", "is_superuser")
+    """Define the admin pages for users."""
+    ordering = ['id']
+    list_display = ['email', 'name']
     fieldsets = (
-        (None, {"fields": ("email", "password",)}),
+        (None, {'fields': ('email', 'password')}),
+        (_('Personal Info'), {'fields': ('name',)}),
         (
-            _("Permissions"),
+            _('Permissions'),
             {
-                "fields": (
-                    "is_staff",
-                    "is_active",
-                    "is_superuser",
-                    "groups",
-                    "user_permissions",
+                'fields': (
+                    'is_active',
+                    'is_staff',
+                    'is_superuser',
                 )
-            },
+            }
         ),
-        (_("Dates"), {"fields": ("last_login", "date_joined")}),
+        (_('Important dates'), {'fields': ('last_login',)}),
     )
+    readonly_fields = ['last_login',]
     add_fieldsets = (
-        (
-            None,
-            {
-                "classes": ("wide",),
-                "fields": (
-                    "email",
-                    "password1",
-                    "password2",
-                    "is_staff",
-                    "is_active",
-                ),
-            },
-        ),
+        (None, {
+            'classes': ('wide',),
+            'fields': (
+                'email',
+                'password1',
+                'password2',
+                'name',
+                'is_active',
+                'is_staff',
+                'is_superuser',
+            ),
+        }),
     )
-    search_fields = ("email",)
-    ordering = ("id",)
 
+
+admin.site.register(models.CustomUser, CustomUserAdmin)
 admin.site.register(models.Recipe)

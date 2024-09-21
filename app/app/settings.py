@@ -42,9 +42,6 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     "rest_framework.authtoken",
-    'allauth',
-    "allauth.account",
-    'allauth.socialaccount',
     'dj_rest_auth',
     "dj_rest_auth.registration",
     'drf_spectacular',
@@ -61,7 +58,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "allauth.account.middleware.AccountMiddleware",
 ]
 
 
@@ -84,7 +80,6 @@ TEMPLATES = [
     },
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # new
 
 SITE_ID = 1 # new
 
@@ -155,29 +150,9 @@ CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", 'http://localhost:8000']
 
 AUTH_USER_MODEL = 'core.CustomUser'
 
-ACCOUNT_USERNAME_REQUIRED = False # new
-ACCOUNT_AUTHENTICATION_METHOD = "email" # new
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_EMAIL_REQUIRED = True # new
-ACCOUNT_UNIQUE_EMAIL = True # new
 
-AUTHENTICATION_BACKENDS = (
-"django.contrib.auth.backends.ModelBackend",
-"allauth.account.auth_backends.AuthenticationBackend", # new
-)
 
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": [
-    "rest_framework.permissions.IsAuthenticated",
-    ],
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-    "rest_framework.authentication.SessionAuthentication",
-    "rest_framework.authentication.TokenAuthentication", # new
-    ],
     'DEFAULT_SCHEMA_CLASS' : 'drf_spectacular.openapi.AutoSchema'
 }
 
-REST_AUTH = {
-    'LOGIN_SERIALIZER': 'users.serializers.CustomLoginSerializer',
-    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer'
-    }

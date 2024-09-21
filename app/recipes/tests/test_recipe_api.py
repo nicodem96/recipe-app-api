@@ -1,11 +1,9 @@
 '''
 tests for recipe APIs
 '''
-from decimal import Decimal
 
-from django.contrib.auth import get_user_model
-from decimal import Decimal
 
+from decimal import Decimal
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
@@ -18,6 +16,7 @@ from core.models import Recipe
 from recipes.serializers import RecipeSerializer
 
 RECIPES_URL = reverse('recipes:recipe-list')
+
 
 def create_recipe(user, **params):
     """Create and return a sample recipe."""

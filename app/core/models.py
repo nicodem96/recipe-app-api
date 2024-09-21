@@ -1,5 +1,5 @@
 from django.db import models # noqa
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin # noqa
 from django.conf import settings
 # Create your models here.
 
@@ -30,19 +30,16 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-class CustomUser(AbstractUser):
-    first_name = None
-    last_name = None
-    username = None
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+    """User in the system."""
     email = models.EmailField(max_length=255, unique=True)
-    USERNAME_FIELD = "email"
-    EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    name = models.CharField(max_length=255)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
-    def __str__(self):
-        return self.email
+    USERNAME_FIELD = 'email'
 
 
 class Recipe(models.Model):
