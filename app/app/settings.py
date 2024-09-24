@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     "rest_framework.authtoken",
-    'dj_rest_auth',
-    "dj_rest_auth.registration",
     'drf_spectacular',
     'users',
     'recipes',
@@ -149,7 +147,6 @@ CORS_ALLOWED_ORIGINS = (
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", 'http://localhost:8000']
 
 AUTH_USER_MODEL = 'core.CustomUser'
-
 
 
 REST_FRAMEWORK = {

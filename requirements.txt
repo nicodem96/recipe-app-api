@@ -2,6 +2,4 @@ Django
 djangorestframework
 psycopg2
 django-cors-headers
-django-allauth
-dj-rest-auth
 drf-spectacular
