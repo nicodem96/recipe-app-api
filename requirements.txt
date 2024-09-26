@@ -1,5 +1,6 @@
-Django
-djangorestframework
-psycopg2
-django-cors-headers
-drf-spectacular
+Django == 5.1.1
+djangorestframework == 3.15
+psycopg2 == 2.9.9
+django-cors-headers == 4.4.0
+drf-spectacular == 0.27.2
+pillow == 10.4.0
